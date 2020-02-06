@@ -1,5 +1,6 @@
 import textwrap
 import enemy
+import items
 
 # basic scene class
 class Scene(object):
@@ -141,21 +142,121 @@ class TownCenter(Scene):
 class GeneralStore(Scene):
     
     def enter(self, character):
-        print('General Store')
+        print("As you enter the general store, the sign says:")
+        print("Daggers: 6 coins. Swords: 6 coins. Health potion: 3 coins.")
+        print("The dagger seems to be fast, but do less damage, where-as the sword is slow but does far greater damage.")
+        print("The health potions looks like it'll heal you 30hp.")
+        print("Would you like to buy anyting?\n1. Yes\n2. No")
+        user_input = input('> ')
+
+        if user_input == '1':
+            print("What would you like to buy?\n1. Sword\n2. Dagger\n3. Health Potion")
+            choice = input('> ')
+
+            if choice == '1':
+                if character.coins > 5:
+                    character.coins -= 5
+                    print(f"You purchase the sword. You have {character.coins} coins left.")
+                    character.inventory['sword'] = items.Sword()
+                    print("You walk back to the sign to see if there's anything else you want.")
+                    return 'general_store'
+                else:
+                    print("Sorry, you can't afford that!")
+                    return 'general_store'
+            elif choice == '2':
+                if character.coins > 5:
+                    character.coins -= 5
+                    print(f"You purchase the dagger. You have {character.coins} coins left.")
+                    character.inventory['dagger'] = items.Dagger()
+                    print("You walk back to the sign to see if there's anything else you want.")
+                    return 'general_store'
+                else:
+                    print("Sorry, you can't afford that!")
+                    return 'general_store'
+            elif choice == '3':
+                if character.coins > 2:
+                    character.coin -= 2
+                    print(f"You purchase the health potion. You have {character.coins} coins left.")
+                    character.inventory['health-potion'] = items.HealthPotion()
+                    print("You walk back to the sign to see if there's anything else you want.")
+                    return 'general_store'
+                else:
+                    print("Sorry, you can't afford that!")
+                    return 'general_store'
+            else:
+                print("Not a valid choice, you head back to try again.")
+                return 'general_store'
+
+        elif user_input == '2':
+            print("You head back out into the town center.")
+            return 'town_center'
+        
+        else:
+            print('The shop owner catches you loitering and kicks you out into the town center.')
+            return 'town_center'
+
+
+
 
 class TraderWagon(Scene):
     
     def enter(self, character):
-        print('Trader Wagon')
+        print('You approach the trader at his wagon...')
+        print("He says: \"Ahhh you look like you could use something like this my friend.\"")
+        print("The trader pulls out a bow.")
+        print("\"It isn't much use in a fight, but it can be used to grapple things from a distance! Only 5 gold.\"")
+        print("Do you:\n1. Purchase the bow.\n2. Head back to the town center.")
+        user_input = input('> ')
+
+        if user_input == '1':
+            if character.coins > 4:
+                character.coins -= 5
+                print(f"You purchase the bow. You have {character.coins} coins remaining.")
+                character.inventory['bow'] = items.Bow()
+                print('You head back out into the town center.')
+                return 'town_center'
+            else:
+                print("You don't have enough to buy that! You head back out into the town center.")
+                return 'town_center'
+        elif user_input == '2':
+            print("You have no interest in the bow, and head back out into the town center.")
+            return 'town_center'
+        else:
+            print('You fall alseep making up your mind and somehow end up back at the town center.')
+            return 'town_center'
+
 
 class RoadOutOfTown(Scene):
 
     def enter(self, character):
-        print('Road Out of town')
+        print('As you head down the road out of town you come across two trails.')
+        print('The one to the left has a sign that reads "Gloomy Forest"...')
+        print('The one of the right has a sign that reads "Somber Mountains".')
+        print("Do you go:\n1. Left\n2. Right\n3. Back to town")
+        user_input =  input('> ')
+
+        if user_input == '1':
+            print("You enter the Gloomy Forest.")
+            return 'gloomy_forest'
+        elif user_input == '2':
+            print("You enter the Somber Mountains.")
+            return 'somber_mountains'
+        elif user_input == '3':
+            print("You head back to the town center.")
+            return 'town_center'
 
 #From the Gloomy Forest, you get to explore the Imbued Ruins
 class GloomyForest(Scene):
-    pass
+    
+    def __init__(self):
+        pass
+
+    def enter(self, character):
+        print("As you're walking through the forest, the heavy air makes it feel like you can't breath.")
+        print("The weeds and vines seem to grab at your ankles as you trudge through the thick brush.")
+        print("It's as if the place itself is evil and has every intention of murdering you.")
+        print("You hear a branch snap in the distance and leaves rustling, as something explodes out of the darkness.")
+        print("There's 3 Goblins, each one somehow uglier than the last.")
 
 class ImbuedRuinsEntrance(Scene):
     pass

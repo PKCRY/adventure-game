@@ -1,5 +1,5 @@
 class Character(object):
-     weapons = {}
+     inventory = {}
 
      def __init__(self):
          self.health = 100

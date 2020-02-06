@@ -1,16 +1,22 @@
-import weapons
+import items
 import random
 
 #Basic enemy class
 class Enemy(object):
     
-    pass
-
+    def attack(self):
+        print(f"The {self.name} attacks you!")
 
 class Goblin(Enemy):
     
     def __init__(self):
-        self.weapon = weapons.Sword()
+        self.weapon = items.Sword()
+        self.health = 20
+        self.name = goblin
 
 class Ork(Enemy):
-    pass
+    
+    def __init__(self):
+        self.weapon = items.Dagger()
+        self.health = 30
+        self.name = ork
