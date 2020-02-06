@@ -1,4 +1,3 @@
-import textwrap
 import enemy
 import items
 
@@ -6,19 +5,21 @@ import items
 class Scene(object):
 
     def enter(self):
+        """The method that is used to enter a scene."""
         print("This scene isn't made yet.")
 
+# class that ends the game
 class Death(Scene):
     
     def enter(self):
         print('You are dead!')
 
-#the other more specific scenes
 #commented out scenes will be added later
 
 class Tavern(Scene):
 
     def __init__(self):
+        #these track if a player has visited certain people in game
         self.bar_visited = False
         self.strange_man_visited = False
 
@@ -41,6 +42,7 @@ class Tavern(Scene):
             print("You return to the tavern.")
             return 'tavern'
 
+    #method that is used to enter the scene
     def enter(self, character):
         print("You enter the Tavern. To your left is a trader who is")
         print("sitting alone in the corner. Straight ahead, there is the bar. To")
@@ -154,7 +156,9 @@ class GeneralStore(Scene):
             choice = input('> ')
 
             if choice == '1':
+                #checks if the character has sufficient coins to purchase the item
                 if character.coins > 5:
+                    #if they do have enough, buy the item and remove coins. then add the sword to the characters inventory.
                     character.coins -= 5
                     print(f"You purchase the sword. You have {character.coins} coins left.")
                     character.inventory['sword'] = items.Sword()
@@ -257,6 +261,7 @@ class GloomyForest(Scene):
         print("It's as if the place itself is evil and has every intention of murdering you.")
         print("You hear a branch snap in the distance and leaves rustling, as something explodes out of the darkness.")
         print("There's 3 Goblins, each one somehow uglier than the last.")
+        #This is where I left off.
 
 class ImbuedRuinsEntrance(Scene):
     pass

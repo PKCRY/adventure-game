@@ -2,6 +2,7 @@ import items
 import random
 
 #Basic enemy class
+#not yet implemented
 class Enemy(object):
     
     def attack(self):

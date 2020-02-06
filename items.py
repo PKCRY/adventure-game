@@ -1,3 +1,5 @@
+#functionality not yet implemented
+
 class HealthPotion(object):
     def drink(self):
         print("You drink the potion.")
